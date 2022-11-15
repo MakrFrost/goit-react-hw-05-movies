@@ -37,3 +37,22 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+/**
+ * @remix-run/router v1.0.3
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+
+//! *лядская машрутизация
+
+//! при клике на которую осуществляется переход на films page, туда с этим фильмом передавать данные, жанры, и т.д.
+
+//! сделать главную хомпейдж, которая принимает все фильмы топовые, обернуть их всех в ссылки,
+
+//! сделать кнопку => назад
