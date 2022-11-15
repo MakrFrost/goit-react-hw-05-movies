@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import getTrandingFilms from './API/FilmsAPI';
 
 import Homepage from './Homepage/Homepage';
-// import FilmPage from './Film-page/Film-page';
+import FilmPage from './Film-page/Film-page';
 
 export default function Movie() {
   const [film, setFilm] = useState('');
@@ -22,11 +23,10 @@ export default function Movie() {
   // console.log(film);
 
   return (
-    <>
-      <h1>Trending now!</h1>
-      <Homepage films={film} />
-      {/* <FilmPage film={film} /> */}
-    </>
+    <Routes>
+      <Route path="/homepage" element={<Homepage films={film} />} />
+      <Route path="/film-info" element={<FilmPage film={film} />} />
+    </Routes>
   );
 }
 
