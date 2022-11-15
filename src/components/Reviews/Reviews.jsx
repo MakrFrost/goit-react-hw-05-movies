@@ -1,7 +1,11 @@
+import { Link } from 'react-router-dom';
+
 export default function Reviews() {
   return (
     <>
-      <h1>а тут про отзывы </h1>
+      <Link to="">
+        <li>а тут про отзывы</li>
+      </Link>
     </>
   );
 }

@@ -1,4 +1,3 @@
-// import { toast } from 'react-toastify';
 import { useState } from 'react';
 
 export default function Movie({ onSubmit }) {
@@ -8,7 +7,7 @@ export default function Movie({ onSubmit }) {
     event.preventDefault();
 
     if (value.trim() === '') {
-      //   toast.info('Write field to search for pictures!');
+      alert('Write field to search for pictures!');
       return;
     }
 

@@ -9,8 +9,10 @@ export default function MovieDetails() {
       <Link to="/">Nazad</Link>
       <h2>тут должно быть информация про кино</h2>
       <Routes>
-        <Route path="cast" element={<h1>loh </h1>} />
-        <Route path="reviews" element={<Reviews />} />
+        <Route index element={<Cast />} />
+      </Routes>
+      <Routes>
+        <Route index element={<Reviews />} />
       </Routes>
     </>
   );

@@ -1,7 +1,11 @@
+import { Link } from 'react-router-dom';
+
 export default function Cast() {
   return (
     <>
-      <h1>тут про актёров </h1>
+      <Link to="">
+        <li>тут про актёров</li>
+      </Link>
     </>
   );
 }

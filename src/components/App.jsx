@@ -12,16 +12,13 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="movies" element={<Movie />} />
-        <Route path="movies/:movieId" element={<MovieDetails />}></Route>
+        <Route path="movies/:movieId" element={<MovieDetails />} />
       </Routes>
     </div>
   );
 };
 
-//! сделать главную хомпейдж, которая принимает все фильмы топовые, обернуть их всех в ссылки,
-//! при клике на которую осуществляется переход на films page, туда с этим фильмом передавать данные, жанры, и т.д.
-//! *лядская машрутизация
-//! сделать кнопку => назад
+//! туда с этим фильмом передавать данные, жанры, и т.д.
 
 // // Get all movie enpoint
 // const APIURL =
