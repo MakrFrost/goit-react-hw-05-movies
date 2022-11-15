@@ -1,4 +1,6 @@
+// import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import getTrandingFilms from '../API/FilmsAPI';
 
 export default function Homepage() {
@@ -21,7 +23,11 @@ export default function Homepage() {
     <>
       <h1>Trending now!</h1>
       {film.map(({ title, id }) => (
-        <h3 key={id}>{title}</h3>
+        <>
+          <Link to="movies">
+            <li key={id}>{title}</li>
+          </Link>
+        </>
       ))}
     </>
   );
