@@ -1,11 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Route, Routes, Link, Outlet } from 'react-router-dom';
+import Cast from '../Cast/Cast';
+import Reviews from '../Reviews/Reviews';
 
-export default function MovieDetails({ id }) {
-  console.log(id);
+export default function MovieDetails() {
   return (
     <>
+      <Outlet />
       <Link to="/">Nazad</Link>
       <h2>тут должно быть информация про кино</h2>
+      <Routes>
+        <Route path="cast" element={<h1>loh </h1>} />
+        <Route path="reviews" element={<Reviews />} />
+      </Routes>
     </>
   );
 }

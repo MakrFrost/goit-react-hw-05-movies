@@ -18,13 +18,13 @@ export default function Homepage() {
     return;
   }
 
-  console.log(film);
+  // console.log(film);
   return (
     <>
       <h1>Trending now!</h1>
       {film.map(({ title, id }) => (
         <>
-          <Link to="movies/:movieId">
+          <Link to={`movies/${id}`}>
             <li key={id}>{title}</li>
           </Link>
         </>
