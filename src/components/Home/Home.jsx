@@ -24,7 +24,7 @@ export default function Homepage() {
       <h1>Trending now!</h1>
       {film.map(({ title, id }) => (
         <>
-          <Link to="movies">
+          <Link to="movies/:movieId">
             <li key={id}>{title}</li>
           </Link>
         </>

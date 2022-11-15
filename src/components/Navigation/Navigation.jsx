@@ -1,11 +1,10 @@
-import Home from '../Home/Home';
-import Movie from '../Movie//Movie';
+import { Link } from 'react-router-dom';
 
 export default function Navigation() {
   return (
     <>
-      <Home />
-      <Movie />
+      <Link to="/">Home Page</Link>
+      <Link to="/movies">Find Film</Link>
     </>
   );
 }

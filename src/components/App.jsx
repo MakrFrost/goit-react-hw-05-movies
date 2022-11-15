@@ -1,17 +1,18 @@
 import { Routes, Route } from 'react-router-dom';
 
-// import Navigation from './Navigation/Navigation';
-// import Movie from './Movie/Movie';
+import Navigation from './Navigation/Navigation';
 import Home from './Home/Home';
+import Movie from './Movie/Movie';
 import MovieDetails from './MovieDetails/MovieDetails';
 
 export const App = () => {
   return (
     <div>
-      {/* <Navigation /> */}
+      <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="movies" element={<MovieDetails />} />
+        <Route path="movies" element={<Movie />} />
+        <Route path="movies/:movieId" element={<MovieDetails />} />
       </Routes>
     </div>
   );
