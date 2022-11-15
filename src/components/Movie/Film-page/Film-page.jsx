@@ -42,8 +42,8 @@ export default function FilmPage({ film }) {
               <h2>Owerview</h2>
               <p>{overview}</p>
               <h2>Genres</h2>
-              <p>{}</p>
-              {/* <p>{genre_ids.map(genre => genre.name + ' ')}</p> */}
+              {/* <p>{}</p> */}
+              <p>{genre_ids.map(genre => genre.name + ' ')}</p>
             </div>
           );
         }

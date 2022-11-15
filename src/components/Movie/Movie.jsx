@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 
 import getTrandingFilms from './API/FilmsAPI';
 
-// import Homepage from './Homepage/Homepage';
-import FilmPage from './Film-page/Film-page';
+import Homepage from './Homepage/Homepage';
+// import FilmPage from './Film-page/Film-page';
 
 export default function Movie() {
   const [film, setFilm] = useState('');
@@ -24,8 +24,8 @@ export default function Movie() {
   return (
     <>
       <h1>Trending now!</h1>
-      {/* <Homepage films={film} /> */}
-      <FilmPage film={film} />
+      <Homepage films={film} />
+      {/* <FilmPage film={film} /> */}
     </>
   );
 }
@@ -35,8 +35,6 @@ export default function Movie() {
 //! *лядская машрутизация
 //! сделать кнопку => назад
 
-{
-}
 // // Get all movie enpoint
 // const APIURL =
 //   'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1';
