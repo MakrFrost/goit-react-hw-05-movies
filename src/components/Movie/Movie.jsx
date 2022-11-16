@@ -1,35 +1,44 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export default function Movie({ onSubmit }) {
-  const [value, setValue] = useState('');
+import SearchMovie from '../SearchMovie/SearchMovie';
+import * as API from '../API/FilmsAPI';
 
-  const submitOnForm = event => {
-    event.preventDefault();
+export default function Movie() {
+  const [film, setFilm] = useState([]);
+  const [searchParam, setSearchParam] = useSearchParams();
 
-    if (value.trim() === '') {
-      alert('Write field to search for pictures!');
-      return;
+  const searchFilm = value => {
+    setSearchParam({ query: value });
+  };
+
+  useEffect(() => {
+    const query = searchParam.get('query') ?? '';
+    if (query) {
+      API.fetchMovieQuery(query).then(setFilm);
     }
-
-    onSubmit(value);
-    setValue('');
-  };
-  const onInputChange = event => {
-    setValue(event.currentTarget.value.toLowerCase());
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParam]);
 
   return (
-    <form onSubmit={submitOnForm}>
-      <button type="submit"> Find film!</button>
+    <>
+      <SearchMovie onSearch={searchFilm} />
 
-      <input
-        type="text"
-        autoComplete="off"
-        autoFocus
-        placeholder="Search films"
-        onChange={onInputChange}
-        value={value}
-      />
-    </form>
+      {film.length > 0 ? (
+        <div className="wrap-films">
+          {film.map(({ title, id }) => (
+            <Link key={id} to={`${id}`}>
+              {title}
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <p>Enter movie name, try again</p>
+      )}
+    </>
   );
 }
+
+// Sorry no movies
+// Try again

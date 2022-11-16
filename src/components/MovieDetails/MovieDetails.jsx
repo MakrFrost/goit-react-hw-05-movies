@@ -1,73 +1,65 @@
-import { Route, Routes, Link, Outlet } from 'react-router-dom';
+import { Route, Routes, NavLink, Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import Cast from '../Cast/Cast';
 import Reviews from '../Reviews/Reviews';
+import * as API from '../API/FilmsAPI';
 
 export default function MovieDetails() {
+  const { movieId } = useParams();
+  const [film, setFilm] = useState(null);
+
+  // const match = useRouteMatch();
+
+  useEffect(() => {
+    API.fetchFilmById(movieId).then(setFilm);
+  }, [movieId]);
+
+  // console.log(film);
+  // console.log(movieId);
+
   return (
     <>
-      <Outlet />
-      <Link to="/">Nazad</Link>
-      <h2>тут должно быть информация про кино</h2>
+      <Link to="/">Back</Link>
+
+      {film && (
+        <div className="wrap">
+          <div>
+            {film.poster_path ? (
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
+                alt={film.title}
+              />
+            ) : (
+              <img
+                src={`https://tl.rulate.ru/i/book/19/10/18925.jpg`}
+                alt={film.title}
+              />
+            )}
+          </div>
+          <div>
+            <h1>{film.title}</h1>
+            <p>User score: {film.vote_average * 10} %</p>
+            <h2>Overwiev</h2>
+            <p>{film.overview}</p>
+            <h3>Genres</h3>
+            <p>{film.genres.map(genre => genre.name).join(', ')}</p>
+          </div>
+        </div>
+      )}
+
+      <h3>Additional information</h3>
+
+      <NavLink to="cast">Cast</NavLink>
+
+      <NavLink to="review">Reviews</NavLink>
+
       <Routes>
-        <Route index element={<Cast />} />
+        <Route index element={movieId && <Cast id={movieId} />} />
       </Routes>
       <Routes>
-        <Route index element={<Reviews />} />
+        <Route index element={movieId && <Reviews id={movieId} />} />
       </Routes>
     </>
   );
 }
-
-// import { useEffect, useState } from 'react';
-
-// import { fetchGenres } from '../API/FilmsAPI';
-
-// export default function MovieDetails({ film }) {
-//     const [genres, setGenre] = useState([]);
-
-//   useEffect(() => {
-//     fetchGenres().then(genre => setGenre(genre.data.genres));
-// console.log(film);
-//   }, []);
-
-// return (
-//   <>
-//     {film.map(
-//       ({ title, id, poster_path, vote_average, overview, genre_ids }) => {
-
-//   let genresOnScreen = genre_ids.map(id => {
-//     if (id === genres) {
-//       console.log(genres);
-//       console.log(id);
-//     }
-//   });
-//   console.log(genresOnScreen);
-
-// let genres = film.genre_ids.map(id => {
-//   if (film.genre_ids?.length === 0) return;
-//   let genresArray = API.getGeneresLS().genres?.find(
-//     obj => obj.id === id
-//   );
-
-//   return genresArray.name;
-// });
-
-//           return (
-//             <div key={id}>
-//               <img src={poster_path} alt={title} />
-//               <h1>{title}</h1>
-//               <p>User Score: {vote_average * 10 + '%'}</p>
-//               <h2>Owerview</h2>
-//               <p>{overview}</p>
-//               <h2>Genres</h2>
-
-//               <p>{genre_ids.map(genre => genre.name + ' ')}</p>
-//             </div>
-//           );
-//         }
-//       )}
-//     </>
-//   );
-// }
-
-//               <Link to="/">Назад<Link/>

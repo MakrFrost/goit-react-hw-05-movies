@@ -1,52 +1,41 @@
 import axios from 'axios';
 
-const API_URL = 'https://api.themoviedb.org/3/';
-const API_KEY = 'api_key=ab5292459fe4dd5c494b0166be76ca45';
+const API_URL = 'https://api.themoviedb.org/3';
+const API_KEY = 'ab5292459fe4dd5c494b0166be76ca45';
 
 // export const FilmAPI = () => {
 //   return <div>kino</div>;
 // };
 
-export default function getTrandingFilms() {
-  const responce = axios.get(`${API_URL}/trending/movie/week?${API_KEY}`);
-  return responce;
-}
-
-export const fetchGenres = () => {
-  const responceGenres = axios.get(
-    `${API_URL}genre/movie/list?${API_KEY}&language=en-US`
+export const getTrandingFilms = () => {
+  const responce = axios.get(
+    `${API_URL}/trending/movie/week?api_key=${API_KEY}`
   );
-  // .then(responceGenres => {
-  //   if (!responceGenres.ok) {
-  //     throw new Error(responceGenres.status);
-  //   }
-  //   return responceGenres.json();
-  // })
-  // .catch(error => {
-  //   error;
-  // });
-  return responceGenres;
+  return responce;
 };
 
-// export const fetchGenres = () => {
-//   const responceGenres = axios.get(
-//     `${API_URL}genre/movie/list?${API_KEY}&language=en-US`
-//   );
-// .then(responceGenres => {
-//   if (!responceGenres.ok) {
-//     throw new Error(responceGenres.status);
-//   }
-//   return responceGenres.json();
-// })
-// .catch(error => {
-//   error;
-// });
-//   return responceGenres;
-// };
+export const fetchFilmById = async id => {
+  const response = await axios.get(`${API_URL}/movie/${id}?api_key=${API_KEY}`);
+  return response.data;
+};
 
-// function FetchPixabay(find, page) {
-//   const responce = axios.get(
-//     `${API_URL}?q=${find}&page=${page}&key=${API_KEY}&${API_SETTINGS}`
-//   );
-//   return responce;
-// }
+export const fetchCast = async id => {
+  const responce = await axios.get(
+    `${API_URL}/movie/${id}/credits?api_key=${API_KEY}&language=en-US`
+  );
+  return responce.data.cast;
+};
+
+export const fetchReviews = async id => {
+  const responce = await axios.get(
+    `${API_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=en-US`
+  );
+  return responce.data.results;
+};
+
+export const fetchMovieQuery = async query => {
+  const responce = await axios.get(
+    `${API_URL}/search/movie?api_key=${API_KEY}&query=${query}&language=en-US&page=1&include_adult=true`
+  );
+  return responce.data.results;
+};
