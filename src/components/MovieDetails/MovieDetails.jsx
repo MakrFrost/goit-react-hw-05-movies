@@ -1,4 +1,11 @@
-import { Route, Routes, NavLink, Link, useParams } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  NavLink,
+  Link,
+  useParams,
+  useLocation,
+} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import Cast from '../Cast/Cast';
@@ -8,7 +15,7 @@ import * as API from '../API/FilmsAPI';
 export default function MovieDetails() {
   const { movieId } = useParams();
   const [film, setFilm] = useState(null);
-
+  const location = useLocation();
   // const match = useRouteMatch();
 
   useEffect(() => {
@@ -17,10 +24,11 @@ export default function MovieDetails() {
 
   // console.log(film);
   // console.log(movieId);
+  const backBtn = location.state?.from ?? '/';
 
   return (
     <>
-      <Link to="/">Back</Link>
+      <Link to={backBtn}>Back</Link>
 
       {film && (
         <div className="wrap">
@@ -55,10 +63,10 @@ export default function MovieDetails() {
       <NavLink to="review">Reviews</NavLink>
 
       <Routes>
-        <Route index element={movieId && <Cast id={movieId} />} />
+        <Route path="cast" element={movieId && <Cast id={movieId} />} />
       </Routes>
       <Routes>
-        <Route index element={movieId && <Reviews id={movieId} />} />
+        <Route path="review" element={movieId && <Reviews id={movieId} />} />
       </Routes>
     </>
   );

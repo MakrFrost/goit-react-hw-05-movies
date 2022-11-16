@@ -10,6 +10,7 @@ export const App = () => {
     <div>
       <Navigation />
       <Routes>
+        <Route path="*" element={<h1>No page, go back</h1>} />
         <Route path="/" element={<Home />} />
         <Route path="movies" element={<Movie />} />
         <Route path="movies/:movieId/*" element={<MovieDetails />} />

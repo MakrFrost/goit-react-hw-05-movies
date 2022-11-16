@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import SearchMovie from '../SearchMovie/SearchMovie';
@@ -8,6 +8,7 @@ import * as API from '../API/FilmsAPI';
 export default function Movie() {
   const [film, setFilm] = useState([]);
   const [searchParam, setSearchParam] = useSearchParams();
+  const location = useLocation();
 
   const searchFilm = value => {
     setSearchParam({ query: value });
@@ -28,7 +29,7 @@ export default function Movie() {
       {film.length > 0 ? (
         <div className="wrap-films">
           {film.map(({ title, id }) => (
-            <Link key={id} to={`${id}`}>
+            <Link key={id} to={`${id}`} state={{ from: location }}>
               {title}
             </Link>
           ))}
