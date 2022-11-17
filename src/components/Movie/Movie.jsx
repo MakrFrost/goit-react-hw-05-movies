@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useSearchParams, useLocation, Link } from 'react-router-dom';
 
 import SearchMovie from '../SearchMovie/SearchMovie';
 import * as API from '../API/FilmsAPI';
 
-export default function Movie() {
+const Movie = () => {
   const [film, setFilm] = useState([]);
   const [searchParam, setSearchParam] = useSearchParams();
   const location = useLocation();
@@ -19,7 +18,6 @@ export default function Movie() {
     if (query) {
       API.fetchMovieQuery(query).then(setFilm);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParam]);
 
   return (
@@ -35,11 +33,10 @@ export default function Movie() {
           ))}
         </div>
       ) : (
-        <p>Enter movie name, try again</p>
+        <p>Enter movie name.</p>
       )}
     </>
   );
-}
+};
 
-// Sorry no movies
-// Try again
+export default Movie;

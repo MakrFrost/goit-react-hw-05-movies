@@ -1,9 +1,8 @@
-// import { Outlet } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as API from '../API/FilmsAPI';
 
-export default function Homepage() {
+const Homepage = () => {
   const [film, setFilm] = useState([]);
 
   useEffect(() => {
@@ -13,8 +12,6 @@ export default function Homepage() {
   if (!film) {
     return;
   }
-
-  // console.log(film);
 
   return (
     <>
@@ -29,4 +26,5 @@ export default function Homepage() {
       </div>
     </>
   );
-}
+};
+export default Homepage;

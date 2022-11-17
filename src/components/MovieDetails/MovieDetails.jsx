@@ -6,30 +6,27 @@ import {
   useParams,
   useLocation,
 } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy } from 'react';
 
-import Cast from '../Cast/Cast';
-import Reviews from '../Reviews/Reviews';
 import * as API from '../API/FilmsAPI';
 
-export default function MovieDetails() {
+const Cast = lazy(() => import('../Cast/Cast'));
+const Reviews = lazy(() => import('../Reviews/Reviews'));
+
+const MovieDetails = () => {
   const { movieId } = useParams();
   const [film, setFilm] = useState(null);
   const location = useLocation();
-  // const match = useRouteMatch();
 
   useEffect(() => {
     API.fetchFilmById(movieId).then(setFilm);
   }, [movieId]);
 
-  // console.log(film);
-  // console.log(movieId);
   const backBtn = location.state?.from ?? '/';
 
   return (
     <>
       <Link to={backBtn}>Back</Link>
-
       {film && (
         <div className="wrap">
           <div>
@@ -55,19 +52,16 @@ export default function MovieDetails() {
           </div>
         </div>
       )}
-
       <h3>Additional information</h3>
-
       <NavLink to="cast">Cast</NavLink>
-
       <NavLink to="review">Reviews</NavLink>
 
       <Routes>
-        <Route path="cast" element={movieId && <Cast id={movieId} />} />
-      </Routes>
-      <Routes>
-        <Route path="review" element={movieId && <Reviews id={movieId} />} />
+        <Route path="cast" element={<Cast id={movieId} />} />
+        <Route path="review" element={<Reviews id={movieId} />} />
       </Routes>
     </>
   );
-}
+};
+
+export default MovieDetails;
